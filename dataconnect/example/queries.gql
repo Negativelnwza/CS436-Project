@@ -1,0 +1,20 @@
+mutation CreateUser($authId: String!, $email: String!, $displayName: String) @auth(level: USER, insecureReason: "This operation is safe to expose to all logged in users.") {
+  user_insert(data: {authId: $authId, email: $email, displayName: $displayName, createdAt_expr: "request.time"})
+}
+
+query GetCalculations @auth(level: USER, insecureReason: "This operation is safe to expose to all logged in users.") {
+  calculations(where: {userId: {eq_expr: "auth.uid"}}) {
+    id
+    expression
+    result
+    createdAt
+  }
+}
+
+mutation CreateCalculation($expression: String!, $result: String!) @auth(level: USER, insecureReason: "This operation is safe to expose to all logged in users.") {
+  calculation_insert(data: {expression: $expression, result: $result, userId_expr: "auth.uid", createdAt_expr: "request.time"})
+}
+
+mutation DeleteCalculation($id: UUID!) @auth(level: USER, insecureReason: "This operation is safe to expose to all logged in users.") {
+  calculation_delete(id: $id)
+}

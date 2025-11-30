@@ -1,0 +1,32 @@
+mutation CreateDemoData @transaction @auth(level: PUBLIC, insecureReason: "This mutation is used to seed the database with initial data and does not require authentication.") {
+  user_insertMany(data: [
+    {
+      id: "550e8400-e29b-41d4-a716-446655440000",
+      authId: "demouser1authid",
+      createdAt: "2024-04-01T00:00:00Z",
+      displayName: "demouser1",
+      email: "demouser1@example.com"
+    },
+    {
+      id: "550e8400-e29b-41d4-a716-446655440001",
+      authId: "demouser2authid",
+      createdAt: "2024-04-01T00:00:00Z",
+      displayName: "demouser2",
+      email: "demouser2@example.com"
+    }
+  ])
+  calculation_insertMany(data: [
+    {
+      userId: "550e8400-e29b-41d4-a716-446655440000",
+      createdAt: "2024-04-01T00:00:00Z",
+      expression: "2 + 2",
+      result: "4"
+    },
+    {
+      userId: "550e8400-e29b-41d4-a716-446655440001",
+      createdAt: "2024-04-01T00:00:00Z",
+      expression: "5 * 5",
+      result: "25"
+    }
+  ])
+}

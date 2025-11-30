@@ -1,0 +1,13 @@
+type User @table {
+  authId: String!
+  createdAt: Timestamp!
+  displayName: String
+  email: String
+}
+
+type Calculation @table {
+  user: User
+  expression: String!
+  result: String!
+  createdAt: Timestamp!
+}
